@@ -1,0 +1,11 @@
+version: '3.0'
+
+services:
+    app:
+        build: .
+        environment:
+          STORAGE_LOCATION: /images
+        volumes:
+          - ./images:/images
+        ports:
+          - 3000:3000
