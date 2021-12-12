@@ -9,15 +9,15 @@ L'énoncé peut être trouvé à [cette adresse](https://www.notion.so/Exercice-
 Ce projet est géré par `docker`, enveloppé avec `docker-compose`.
 Il est donc aisé de déployer le serveur :
 
-```sh
-docker-compose up
+```
+$ docker-compose up
 ```
 
 Pour lancer les tests, on peut soit profiter du fait qu'ils soient lancés lors de la construction de l'image Docker, soit à la main.
 
-```sh
-npm install
-npm run test
+```
+$ npm install
+$ npm run test
 ```
 
 Les fonctions utilitaires ainsi que les routes y sont testés autant en cas de réussite qu'en cas d'erreur.
