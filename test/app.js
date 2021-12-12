@@ -213,8 +213,8 @@ describe("Routes", () => {
 				.expect(200)
 				.then(() => {
 					setTimeout(() => {
-						var got = sha256sum(fs.readFileSync("./test/storage/a6df2fb8c4b89a8e76c9fbf7b0b9e5d26266c2014a6493f14800d7b4e184bd70-100-100-cover-100.png"))
-						var want = "36ea8691917e2f55d0233a53a35ef3e767649ceb912c67341575df4f25e355e2"
+						let got = sha256sum(fs.readFileSync("./test/storage/a6df2fb8c4b89a8e76c9fbf7b0b9e5d26266c2014a6493f14800d7b4e184bd70-100-100-cover-100.png"))
+						let want = "36ea8691917e2f55d0233a53a35ef3e767649ceb912c67341575df4f25e355e2"
 						assert.equal(got, want)
 						done()
 					}, 20)
@@ -234,8 +234,8 @@ describe("Routes", () => {
 				.expect(200)
 				.then(() => {
 					setTimeout(() => {
-						var got = sha256sum(fs.readFileSync("./test/storage/a6df2fb8c4b89a8e76c9fbf7b0b9e5d26266c2014a6493f14800d7b4e184bd70-600-300-fill-100.png"))
-						var want = "fa3c11f9db5a7ba1b860e9176c35fc69bd879476d93a7afce072ac30777807cb"
+						let got = sha256sum(fs.readFileSync("./test/storage/a6df2fb8c4b89a8e76c9fbf7b0b9e5d26266c2014a6493f14800d7b4e184bd70-600-300-fill-100.png"))
+						let want = "fa3c11f9db5a7ba1b860e9176c35fc69bd879476d93a7afce072ac30777807cb"
 						assert.equal(got, want)
 						done()
 					}, 20)
@@ -255,8 +255,8 @@ describe("Routes", () => {
 				.expect(200)
 				.then(() => {
 					setTimeout(() => {
-						var got = sha256sum(fs.readFileSync("./test/storage/e40ddc6196d3c800884f0537a258a6de58f93ca75410194625b225659cafca5d-480-480-cover-30.jpg"))
-						var want = "a177b2622326beb996ee181f6ab051567c71205cea0aa71a121bd532ec55e3f5"
+						let got = sha256sum(fs.readFileSync("./test/storage/e40ddc6196d3c800884f0537a258a6de58f93ca75410194625b225659cafca5d-480-480-cover-30.jpg"))
+						let want = "a177b2622326beb996ee181f6ab051567c71205cea0aa71a121bd532ec55e3f5"
 						assert.equal(got, want)
 						done()
 					}, 20)
@@ -275,11 +275,11 @@ describe("Routes", () => {
 				})
 				.then(() => {
 					setTimeout(() => {
-						var got = sha256sum(fs.readFileSync("./test/storage/0ea30173599a253144645605d6de5efc301386e55454292ef477bb0539670094-300-300-cover-30.webp"))
+						let got = sha256sum(fs.readFileSync("./test/storage/0ea30173599a253144645605d6de5efc301386e55454292ef477bb0539670094-300-300-cover-30.webp"))
 						// due to the WEBP quality/compression algorithm, the SHA256 sum won't always be the same.
 						// after several (>100) tests, it only produces two distinct results
-						var want1 = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-						var want2 = "fd3dca5b2d8e7aa7121a98902e00dae34f81b326d71b5a6c91212084ff1ee495"
+						let want1 = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+						let want2 = "fd3dca5b2d8e7aa7121a98902e00dae34f81b326d71b5a6c91212084ff1ee495"
 						assert.match(got, new RegExp(want1 + "|" + want2))
 						done()
 					}, 20)

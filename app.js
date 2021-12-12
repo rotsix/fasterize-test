@@ -33,10 +33,10 @@ const storage = {
 
 	exists: function(id) {
 		if (id === "") return ""
-		var dir = fs.opendirSync(storage.location)
+		let dir = fs.opendirSync(storage.location)
 		let dirent
 		while ((dirent = dir.readSync()) !== null) {
-			var ext = path.extname(dirent.name)
+			let ext = path.extname(dirent.name)
 			if (dirent.name.slice(0, -ext.length) === id) {
 				dir.close()
 				return storage.location + "/" + dirent.name
@@ -70,7 +70,7 @@ function isImage(data) {
     	webp: "52494646",
 	}
 
-	var header = data.toString("hex", 0, 4);
+	let header = data.toString("hex", 0, 4);
 	return Object.values(headers).includes(header)
 }
 
@@ -82,10 +82,10 @@ app.post("/images", (req, res) => {
 	if (!req.files || Object.keys(req.files).length === 0) {
       	return res.status(400).end("no file uploaded")
     }
-    var keys = Object.keys(req.files)
-    var image = req.files[keys[0]]
-	var filename = sha256sum(image.data)
-	var ext = path.extname(image.name)
+    let keys = Object.keys(req.files)
+    let image = req.files[keys[0]]
+	let filename = sha256sum(image.data)
+	let ext = path.extname(image.name)
 
 	if (!isImage(image.data)) {
 		return res.status(400).end("file is not an image")
@@ -102,7 +102,7 @@ app.post("/images", (req, res) => {
 
 // GET /images/:id :: get the specified (un)optimized image
 app.get("/images/:id", (req, res) => {
-	var id = req.params.id
+	let id = req.params.id
 	fullname = storage.exists(id)
 	if (fullname === "") {
 		return res.status(404).end("image not found")
@@ -113,11 +113,11 @@ app.get("/images/:id", (req, res) => {
 
 // GET /generator :: transform and optimize an image
 app.get("/generator", (req, res) => {
-	var source = req.query.src
-	var height = req.query.height
-	var width = req.query.width
-	var fit = req.query.fit || "cover"
-	var quality = req.query.quality || "100"
+	let source = req.query.src
+	let height = req.query.height
+	let width = req.query.width
+	let fit = req.query.fit || "cover"
+	let quality = req.query.quality || "100"
 
 	if (source === undefined) {
 		return res.status(400).end("src is missing")
@@ -138,14 +138,14 @@ app.get("/generator", (req, res) => {
 		return res.status(400).end("quality must be between 0 and 100 (included)")
 	}
 
-	var sourcepath = storage.exists(source)
+	let sourcepath = storage.exists(source)
 	if (sourcepath === "") {
 		return res.status(404).end("source image not found")
 	}
 
 	// /path/to/src_id-height-width-fit-quality.ext
-	var ext = path.extname(sourcepath)
-	var outputname = [source, height, width, fit, quality].join("-")
+	let ext = path.extname(sourcepath)
+	let outputname = [source, height, width, fit, quality].join("-")
 	outputpath = path.dirname(sourcepath) + "/" + outputname + ext
 
 	if (storage.exists(outputname) === outputpath) {
@@ -153,7 +153,7 @@ app.get("/generator", (req, res) => {
 		return res.end("optimized image id: " + outputname)
 	}
 
-	var newimg = sharp(sourcepath)
+	let newimg = sharp(sourcepath)
 		.resize({
 			width: width,
 			height: height,
